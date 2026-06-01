@@ -176,7 +176,9 @@ function TopBar({ t, session, currentUser, onHome, onLogout, onLoginClick }) {
     </div>
   );
 }
-
+function Field({ t, label, type = "text", value, onChange, placeholder }) {
+  return <label style={{ display: "block" }}><span style={{ fontSize: 13, color: t.c.muted, display: "block", marginBottom: 5 }}>{label}</span><input className="b24-input" type={type} value={value} onChange={onChange} placeholder={placeholder} /></label>;
+}
 /* ----------------------------- LANDING ----------------------------- */
 /* ============== ANIMATED COUNTER hook ============== */
 function useAnimatedNumber(target, duration = 1500, start = 0) {
@@ -3382,11 +3384,10 @@ export default function App({ initialCourses = [], initialOverrides = {} }: { in
   const activeEnrollment = activeCourseId ? (myEnrollments[activeCourseId] || null) : null;
   const t = makeTokens(false);
 
-  if (loading) return <div style={{ ...t.appWrap, display: "flex", alignItems: "center", justifyContent: "center", minHeight: 400 }}><style>{FONT_IMPORT}</style><div style={{ color: t.muted }}>Բեռնում...</div></div>;
-
+  if (loading) return <div style={{ ...t.appWrap, display: "flex", alignItems: "center", justifyContent: "center", minHeight: 400 }}><div style={{ color: t.muted }}>Բեռնում...</div></div>;
   return (
     <div style={t.appWrap}>
-      <style>{FONT_IMPORT}{globalCSS(t)}</style>
+      <style dangerouslySetInnerHTML={{ __html: globalCSS(t) }} />
       <TopBar t={t} session={session} currentUser={currentUser}
         onHome={() => { setActiveCourseId(null); setView(session === "ADMIN" ? "admin" : currentUser ? "catalog" : "landing"); }}
         onLogout={onLogout} onLoginClick={() => setView("auth")} />
