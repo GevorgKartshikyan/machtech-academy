@@ -757,7 +757,7 @@ function Auth({ t, showToast, onAuthed }) {
             <Field t={t} label="Email" value={f.email} onChange={set("email")} placeholder="email" />
             <Field t={t} label="Գաղտնաբառ" type="password" value={f.password} onChange={set("password")} />
             <button className="b24-btn b24-btn-primary" onClick={doLogin} disabled={busy} style={{ marginTop: 6, opacity: busy ? .6 : 1 }}>{busy ? "..." : "Մուտք գործել"}</button>
-            <div style={{ fontSize: 12.5, color: t.c.muted, textAlign: "center" }}>Admin՝ seed-ով ստեղծված հաշիվը</div>
+            {/*<div style={{ fontSize: 12.5, color: t.c.muted, textAlign: "center" }}>Admin՝ seed-ով ստեղծված հաշիվը</div>*/}
           </div>
         )}
       </div>
