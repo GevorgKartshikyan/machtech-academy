@@ -1053,9 +1053,9 @@ function ModuleView({ t, idx, enrollment, email, courseId, modules, updateEnroll
         );
       case "callout":
         const cVar = b.variant || "info";
-        const cStyle = { info: { bg: t.c.accentSoft, br: t.c.accent, ic: "💡" }, warn: { bg: "#FFF6E0", br: t.c.warn, ic: "⚠️" }, success: { bg: "#E8F7EF", br: t.c.good, ic: "✓" }, danger: { bg: "#FBE8E8", br: t.c.bad, ic: "⛔" } }[cVar];
+        const cStyle = { info: { bg: t.c.accentSoft, br: t.c.accent, ic: "💡" }, warn: { bg: "#FFF6E0", br: t.c.warn, ic: "⚠️" }, success: { bg: "#E8F7EF", br: t.c.good, ic: "✓" }, danger: { bg: "#FBE8E8", br: t.c.bad, ic: "⛔" } }[cVar] || {};
         return (
-          <div key={i} style={{ background: cStyle.bg, borderLeft: `4px solid ${cStyle.br}`, padding: "14px 16px", borderRadius: 8, margin: "14px 0", fontSize: 14.5, lineHeight: 1.6 }}>
+          <div key={i} style={{ background: cStyle?.bg, borderLeft: `4px solid ${cStyle.br}`, padding: "14px 16px", borderRadius: 8, margin: "14px 0", fontSize: 14.5, lineHeight: 1.6 }}>
             <div style={{ fontWeight: 700, marginBottom: 4 }}>{cStyle.ic} {b.title || (cVar === "warn" ? "Ուշադրություն" : cVar === "success" ? "Կարևոր" : cVar === "danger" ? "Զգուշացում" : "Նշում")}</div>
             <div style={{ color: t.c.text, whiteSpace: "pre-wrap" }}>{b.text}</div>
           </div>
