@@ -748,7 +748,7 @@ function Auth({ t, showToast, onAuthed }) {
           <div style={{ display: "grid", gap: 12 }}>
             <Field t={t} label="Անուն Ազգանուն" value={f.fullName} onChange={set("fullName")} />
             <Field t={t} label="Հեռախոսահամար" value={f.phone} onChange={set("phone")} placeholder="+374 ..." />
-            <Field t={t} label="Email (որով կուղարկվի CV-ն)" type="email" value={f.email} onChange={set("email")} />
+            <Field t={t} label="Email (որով ուղղարկել եք CV-ին)" type="email" value={f.email} onChange={set("email")} />
             <Field t={t} label="Գաղտնաբառ" type="password" value={f.password} onChange={set("password")} />
             <button className="b24-btn b24-btn-primary" onClick={doRegister} disabled={busy} style={{ marginTop: 6, opacity: busy ? .6 : 1 }}>{busy ? "..." : "Գրանցվել"}</button>
           </div>
