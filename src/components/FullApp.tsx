@@ -7,9 +7,8 @@
 // ============================================================================
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { api } from "@/lib/api";
-import { STATIC_STRINGS } from "@/lib/i18n";
 import { DEFAULT_MODULES, DEFAULT_FINAL } from "@/lib/default-content";
-
+import { STATIC_STRINGS, STATIC_STRING_GROUPS } from "@/lib/i18n";
 const FONT_IMPORT = `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Montserrat+Arm:wght@300;400;500;600;700;800;900&display=swap');`;
 
 const BRAND = {
