@@ -812,7 +812,7 @@ function Catalog({ t, user, email, content, accessibleCourses, enrollUser, onOpe
   const available = accessibleCourses.filter((c) => !enrolledIds.includes(c.id));
   const lockedRestricted = Object.values(allCoursesById).filter((c) => c.status === "published" && c.accessMode === "restricted" && !(user.accessGrants || []).includes(c.id));
 
-  const enrollAndOpen = (cid) => { enrollUser(email, cid); onOpenCourse(cid); };
+  const enrollAndOpen = async (cid) => { await enrollUser(email, cid); onOpenCourse(cid); };
 
   return (
     <div className="b24-fade" style={{ paddingTop: 28 }}>
@@ -3397,9 +3397,13 @@ export default function App({ initialCourses = [], initialOverrides = {} }: { in
           {view === "auth" && <Auth t={t} showToast={showToast} onAuthed={onAuthed} />}
           {view === "catalog" && currentUser && <Catalog t={t} user={currentUser} email={session} content={content} accessibleCourses={accessibleCourses(currentUser)} enrollUser={enrollUser}
             onOpenCourse={(cid) => { setActiveCourseId(cid); setView("dashboard"); }} />}
+          {view === "dashboard" && currentUser && activeCourse && !activeEnrollment && (() => {
+            api.enroll(activeCourseId).then(() => refreshMyEnrollments()).catch(() => {});
+            return <div style={{ padding: 60, textAlign: "center", color: t.c.muted }}>Բացում ենք դասընթացը...</div>;
+          })()}
           {view === "dashboard" && currentUser && activeCourse && activeEnrollment && <Dashboard t={t} user={currentUser} email={session} course={activeCourse} enrollment={activeEnrollment}
-            onBackToCatalog={() => { setActiveCourseId(null); setView("catalog"); }}
-            onOpenModule={(i) => setView("module:" + i)} onOpenFinal={() => setView("final")} onOpenCert={() => setView("cert")} />}
+                                                                                                 onBackToCatalog={() => { setActiveCourseId(null); setView("catalog"); }}
+                                                                                                 onOpenModule={(i) => setView("module:" + i)} onOpenFinal={() => setView("final")} onOpenCert={() => setView("cert")} />}
           {view.startsWith("module:") && currentUser && activeCourse && activeEnrollment && <ModuleView t={t} idx={parseInt(view.split(":")[1], 10)} enrollment={activeEnrollment} email={session} courseId={activeCourseId}
             modules={activeCourse.modules} updateEnrollment={updateEnrollment} showToast={showToast} onBack={() => setView("dashboard")}
             onNext={(i) => setView(i < activeCourse.modules.length ? "module:" + i : "dashboard")} onOpenFinal={() => setView("final")} />}
